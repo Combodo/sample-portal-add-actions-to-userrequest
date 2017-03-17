@@ -6,10 +6,11 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
     {
         switch($iMenuId)
         {
-            case iPopupMenuExtension::PORTAL_OBJDETAILS_ACTION:
-                // $param is a DBObject
+            case iPopupMenuExtension::PORTAL_OBJDETAILS_ACTIONS:
+                // $param is an array containing portal id and a DBObject
                 $aResult = array();
-                $oObj = $param;
+                $sPortalId = $param['portal_id'];
+                $oObj = $param['object'];
 
                 if ($oObj instanceof UserRequest)
                 {
@@ -19,6 +20,7 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
                         'http://www.google.fr',
                         '_blank'
                     );
+                    $oUrlButton->AddCssClass('testclass');
                     $oJSButton = new JSButtonItem(
                         'test_js',
                         'Alert JS',
