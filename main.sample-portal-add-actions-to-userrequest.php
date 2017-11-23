@@ -12,8 +12,22 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
                 $sPortalId = $param['portal_id'];
                 $oObj = $param['object'];
 
+				// -----------------------------------------------------------------------------
+				// START EDITING HERE
+				// -----------------------------------------------------------------------------
+				//
+				// Do you test here to know if the current $oObj is eligible to an action button
                 if ($oObj instanceof UserRequest)
                 {
+					// Example to make a link to a portal object
+                    $oUrlToSelfButton = new URLButtonItem(
+                        'self_url',
+                        'Open me in a tab',
+	                    iTopPortalViewUrlMaker::MakeObjectUrl(get_class($oObj), $oObj->GetKey()),
+                        '_blank'
+                    );
+					
+					// Example to make a button to an external URL
                     $oUrlButton = new URLButtonItem(
                         'test_url',
                         'Google URL',
@@ -21,6 +35,8 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
                         '_blank'
                     );
                     $oUrlButton->AddCssClass('testclass');
+					
+					// Example to run a javascript snippet on click
                     $oJSButton = new JSButtonItem(
                         'test_js',
                         'Alert JS',
@@ -29,8 +45,13 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
                             //'https://code.jquery.com/jquery-1.12.4.min.js',
                         )
                     );
-                    $aResult = array($oUrlButton, $oJSButton);
+					
+					// Don't forget to add the buttons to the result !
+                    $aResult = array($oUrlToSelfButton, $oUrlButton, $oJSButton);
                 }
+				// -----------------------------------------------------------------------------
+				// STOP EDITING HERE
+				// -----------------------------------------------------------------------------
                 break;
 
             default:
