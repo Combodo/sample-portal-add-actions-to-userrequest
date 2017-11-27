@@ -23,6 +23,7 @@ class SamplePortalButtonsExtension implements iPopupMenuExtension
                     $oUrlToSelfButton = new URLButtonItem(
                         'self_url',
                         'Open me in a tab',
+						// Note: Change this class to the one used in your portal instance
 	                    iTopPortalViewUrlMaker::MakeObjectUrl(get_class($oObj), $oObj->GetKey()),
                         '_blank'
                     );
